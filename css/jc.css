@@ -1,0 +1,178 @@
+@charset 'utf-8';
+
+html {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+}
+
+body {
+    overflow-x: hidden; /* 가로 스크롤이 생기지 않도록 */
+    color: rgb(29, 29, 31);
+    letter-spacing: -0.05em; /* 자간을 살짝 줄여주기 */
+    background: white;
+}
+
+p {
+    line-height: 1.6; /* 문단 사이 간격 */
+}
+
+a {
+    color: rgb(29, 29, 31);
+    text-decoration: none;
+}
+
+.global-nav {
+    height: 44px;
+    padding: 0 1rem;
+}
+
+.local-nav {
+    height: 52px;
+    border-bottom: 1px solid #ddd;
+    padding: 0 1rem;
+}
+
+.global-nav-links,
+.local-nav-links {
+    max-width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
+
+.global-nav-links {
+    justify-content: space-between;
+}
+
+.local-nav-links .product-name {
+    margin-right: auto;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.local-nav-links a {
+    font-size: 0.8rem;
+}
+
+.local-nav-links a:not(.product-name) {
+    margin-left: 2em;
+}
+.scroll-section {
+    padding-top: 50vh; /* 브라우저 창 절반만큼 padding-top을 준다 */
+}
+
+#scroll-section-0 h1 {
+    font-size: 4rem; /* 14px * 4 = 56px */
+    text-align: center;
+}
+
+.main-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3em; /* 현재 element의 font 사이즈의 3배 높이 */
+    font-size: 2.5rem;
+    margin: 5px 0;
+}
+
+.main-message p {
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.main-message small {
+    display: block;
+    margin-bottom: 0.5em; /* 엘리먼트의 style 부분은 해당 엘리먼트의 font-size를 바탕으로 계산하도록 em 쓰는 것도 좋다 */
+    font-size: 1rem; /* font-size는 root로 설정한 14px에 비례하도록 */
+}
+
+#scroll-section-2 .main-message {
+    font-size: 3.5rem;
+}
+
+.description {
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: #888;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.description strong {
+    float: left;
+    margin-right: 0.2em;
+    font-size: 3rem;
+    color: rgb(29, 29, 31);
+}
+
+.desc-message {
+    font-weight: bold;
+    width: 50%;
+}
+
+.pin {
+    width: 1px;
+    height: 100px;
+    background: rgb(29, 29, 31);
+}
+
+.mid-message {
+    padding: 0 1rem;
+    font-size: 2rem;
+    color: #888;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mid-message strong {
+    color: rgb(29, 29, 31);
+}
+
+.canvas-caption {
+    padding: 0 1rem;
+    color: #888;
+    font-size: 1.2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 7rem;
+    background: darkorange;
+}
+
+@media (min-width: 1024px) {
+    /* 창 크기가 1024px 이상이면 아래의 css가 적용된다 */
+    #scroll-section-0 h1 {
+        font-size: 9vw; /* window 사이즈의 9% 크기로 => 변동하는 값 */
+    }
+    .main-message {
+        font-size: 4vw;
+    }
+    .description {
+        font-size: 2rem;
+    }
+    .description strong {
+        font-size: 6rem;
+    }
+    #scroll-section-2 .main-message {
+        font-size: 6vw;
+    }
+    .main-message small {
+        font-size: 1.5vw;
+    }
+    .desc-message {
+        width: 20%;
+    }
+    .mid-message {
+        font-size: 4vw;
+    }
+    .canvas-caption {
+        font-size: 2rem;
+    }
+}
