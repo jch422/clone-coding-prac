@@ -22,11 +22,19 @@ a {
 }
 
 .global-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 44px;
     padding: 0 1rem;
 }
 
 .local-nav {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    width: 100%;
     height: 52px;
     border-bottom: 1px solid #ddd;
     padding: 0 1rem;
@@ -144,6 +152,25 @@ a {
     align-items: center;
     height: 7rem;
     background: darkorange;
+}
+
+.sticky-elem {
+    display: none; /* javascript를 이용해서 선택적으로 노출 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+/*
+    #show-scene-# 은 body 에 붙여줄 ID 값
+    ex) #show-scene-2가 body의 id가 되면,
+    #scoll-section-2의 sticky-elem만 display속성이 block이 된다
+*/
+#show-scene-0 #scroll-section-0 .sticky-elem,
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
+    display: block;
 }
 
 @media (min-width: 1024px) {
