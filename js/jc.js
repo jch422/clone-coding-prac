@@ -51,6 +51,17 @@
                 i
             ].objs.container.style.height = `${sceneInfo[i].scrollHeight}px`;
         }
+
+        yOffset = window.pageYOffset;
+        let totalScrollHeight = 0;
+        for (let i = 0; i < sceneInfo.length; i++) {
+            totalScrollHeight += sceneInfo[i].scrollHeight;
+            if (totalScrollHeight >= yOffset) {
+                currentScene = i;
+                break;
+            }
+        }
+        document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
 
     function scrollLoop() {
@@ -61,17 +72,19 @@
 
         if (yOffset > prevScrollHeight + sceneInfo[currentScene].scrollHeight) {
             currentScene++;
+            document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
         if (yOffset >= 0 && yOffset < prevScrollHeight) {
             currentScene--;
+            document.body.setAttribute('id', `show-scene-${currentScene}`);
         }
     }
 
-    window.addEventListener('resize', setLayout);
     window.addEventListener('scroll', () => {
         yOffset = window.pageYOffset; // window.pageYOffset => 현재 스크롤 위치
         scrollLoop();
     });
-
-    setLayout();
+    //window.addEventListener('DOMContentLoaded', setLayout); // DOM만 로드 되면 실행되기 때문에 load 보다 실행시점이 조금 더 빠르다
+    window.addEventListener('load', setLayout); // 웹페이지의 이미지 등 리소스 전부 로드되고 나서 실행
+    window.addEventListener('resize', setLayout);
 })();
