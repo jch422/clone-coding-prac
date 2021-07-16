@@ -82,6 +82,7 @@ a {
     height: 3em; /* 현재 element의 font 사이즈의 3배 높이 */
     font-size: 2.5rem;
     margin: 5px 0;
+    opacity: 0;
 }
 
 .main-message p {
