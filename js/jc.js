@@ -26,7 +26,31 @@
                 ),
             },
             values: {
-                messageA_opacity: { from: 0, to: 1 }, // 시작값, 끝값
+                messageA_opacity_in: {
+                    from: 0,
+                    to: 1,
+                    section: { start: 0.1, end: 0.2 },
+                }, // 시작값, 끝값
+                messageA_opacity_out: {
+                    from: 1,
+                    to: 0,
+                    section: { start: 0.25, end: 0.3 },
+                },
+                messageA_translateY_in: {
+                    from: 20,
+                    to: 0,
+                    section: { start: 0.1, end: 0.2 },
+                },
+                messageA_translateY_out: {
+                    from: 0,
+                    to: -20,
+                    section: { start: 0.25, end: 0.3 },
+                },
+                messageB_opacity_in: {
+                    from: 0,
+                    to: 1,
+                    section: { start: 0.3, end: 0.4 },
+                },
             },
         },
         {
@@ -80,11 +104,28 @@
         document.body.setAttribute('id', `show-scene-${currentScene}`);
     }
 
-    function calcValues({ from, to }, currentYOffset) {
-        // currentYOffset => 현재 씬에서 얼마나 스크롤됐는지
-        const scrollRatio =
-            currentYOffset / sceneInfo[currentScene].scrollHeight;
-        const rv = scrollRatio * (to - from) + from;
+    function calcValues({ from, to, section }, currentYOffset) {
+        let rv;
+        const scrollHeight = sceneInfo[currentScene].scrollHeight;
+        const scrollRatio = currentYOffset / scrollHeight; // currentYOffset => 현재 씬에서 얼마나 스크롤됐는지
+
+        if (section) {
+            // start ~ end 사이에 애니메이션 실행
+            const { start, end } = section;
+            const partScrollStart = start * scrollHeight;
+            const partScrollEnd = end * scrollHeight;
+            const partScrollHeight = partScrollEnd - partScrollStart;
+
+            if (currentYOffset < partScrollStart) return from;
+            if (currentYOffset > partScrollEnd) return to;
+
+            rv =
+                ((currentYOffset - partScrollStart) / partScrollHeight) *
+                    (to - from) +
+                from;
+        } else {
+            rv = scrollRatio * (to - from) + from;
+        }
 
         return rv;
     }
@@ -93,15 +134,42 @@
         const { objs } = sceneInfo[currentScene];
         const { values } = sceneInfo[currentScene];
         const currentYOffset = yOffset - prevScrollHeight;
+        const scrollRatio =
+            currentYOffset / sceneInfo[currentScene].scrollHeight;
 
         switch (currentScene) {
             case 0:
-                const { messageA_opacity } = values;
-                const messageA_opacity_in = calcValues(
-                    messageA_opacity,
+                const {
+                    messageA_opacity_in,
+                    messageA_opacity_out,
+                    messageA_translateY_in,
+                    messageA_translateY_out,
+                } = values;
+                const message_opacity_in = calcValues(
+                    messageA_opacity_in,
                     currentYOffset
                 );
-                objs.messageA.style.opacity = messageA_opacity_in;
+                const message_opacity_out = calcValues(
+                    messageA_opacity_out,
+                    currentYOffset
+                );
+                const message_translate_in = calcValues(
+                    messageA_translateY_in,
+                    currentYOffset
+                );
+                const message_translate_out = calcValues(
+                    messageA_translateY_out,
+                    currentYOffset
+                );
+
+                if (scrollRatio <= messageA_opacity_in.section.end) {
+                    objs.messageA.style.opacity = message_opacity_in;
+                    objs.messageA.style.transform = `translateY(${message_translate_in}%)`;
+                } else {
+                    objs.messageA.style.opacity = message_opacity_out;
+                    objs.messageA.style.transform = `translateY(${message_translate_out}%)`;
+                }
+
                 break;
             case 1:
                 break;
