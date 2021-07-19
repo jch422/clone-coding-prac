@@ -117,15 +117,26 @@ a {
     color: rgb(29, 29, 31);
 }
 
-.desc-message {
+.sticky-elem.desc-message {
+    width: 45%;
     font-weight: bold;
-    width: 50%;
+    opacity: 0;
 }
 
 .pin {
     width: 1px;
     height: 100px;
     background: rgb(29, 29, 31);
+}
+
+#scroll-section-2 .b {
+    top: 10%;
+    left: 40%;
+}
+
+#scroll-section-2 .c {
+    top: 15%;
+    left: 45%;
 }
 
 .mid-message {
@@ -153,6 +164,7 @@ a {
     justify-content: center;
     align-items: center;
     height: 7rem;
+    color: white;
     background: darkorange;
 }
 
@@ -194,8 +206,15 @@ a {
     .main-message small {
         font-size: 1.5vw;
     }
-    .desc-message {
+    .sticky-elem.desc-message {
         width: 20%;
+    }
+    #scroll-section-2 .b {
+        top: 20%;
+        left: 53%;
+    }
+    #scroll-section-2 .c {
+        left: 55%;
     }
     .mid-message {
         font-size: 4vw;
