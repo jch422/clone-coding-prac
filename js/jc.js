@@ -24,8 +24,15 @@
                 messageD: document.querySelector(
                     '#scroll-section-0 .main-message.d'
                 ),
+                canvas: document.querySelector('#video-canvas-0'),
+                context: document
+                    .querySelector('#video-canvas-0')
+                    .getContext('2d'),
+                videoImages: [],
             },
             values: {
+                videoImageCount: 300,
+                imageSequence: [0, 299],
                 canvas_opacity: [1, 0, { start: 0.9, end: 1 }],
                 messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
                 messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
@@ -85,25 +92,6 @@
                 messageC_opacity_out: [1, 0, { start: 0.95, end: 1 }],
                 pinB_scaleY: [0.5, 1, { start: 0.6, end: 0.65 }],
                 pinC_scaleY: [0.5, 1, { start: 0.87, end: 0.92 }],
-
-                // messageA_translateY_in: [20, 0, { start: 0.15, end: 0.2 }],
-                // messageB_translateY_in: [30, 0, { start: 0.5, end: 0.55 }],
-                // messageC_translateY_in: [30, 0, { start: 0.72, end: 0.77 }],
-                // messageA_opacity_in: [0, 1, { start: 0.15, end: 0.2 }],
-                // messageB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
-                // messageC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
-                // messageA_translateY_out: [0, -20, { start: 0.3, end: 0.35 }],
-                // messageB_translateY_out: [0, -20, { start: 0.58, end: 0.63 }],
-                // messageC_translateY_out: [0, -20, { start: 0.85, end: 0.9 }],
-                // messageA_opacity_out: [1, 0, { start: 0.3, end: 0.35 }],
-                // messageB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
-                // messageC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
-                // pinB_scaleY: [0.5, 1, { start: 0.5, end: 0.55 }],
-                // pinC_scaleY: [0.5, 1, { start: 0.72, end: 0.77 }],
-                // pinB_opacity_in: [0, 1, { start: 0.5, end: 0.55 }],
-                // pinC_opacity_in: [0, 1, { start: 0.72, end: 0.77 }],
-                // pinB_opacity_out: [1, 0, { start: 0.58, end: 0.63 }],
-                // pinC_opacity_out: [1, 0, { start: 0.85, end: 0.9 }],
             },
         },
         {
@@ -126,6 +114,16 @@
             document.body.classList.remove('local-nav-sticky');
         }
     }
+
+    function setCanvasImages() {
+        let imgElem;
+        for (let i = 0; i < sceneInfo[0].values.videoImageCount; i++) {
+            imgElem = new Image(); // or document.createElement('img');
+            imgElem.src = `./video/001/IMG_${6726 + i}.JPG`;
+            sceneInfo[0].objs.videoImages.push(imgElem);
+        }
+    }
+    setCanvasImages();
 
     function setLayout() {
         // 각 스크롤 섹션의 높이 세팅
@@ -197,6 +195,11 @@
 
         switch (currentScene) {
             case 0:
+                const sequence = Math.round(
+                    calcValues(values.imageSequence, currentYOffset)
+                );
+                objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+
                 if (scrollRatio <= 0.22) {
                     // in
                     objs.messageA.style.opacity = calcValues(
