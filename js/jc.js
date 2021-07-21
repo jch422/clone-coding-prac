@@ -152,6 +152,10 @@
             }
         }
         document.body.setAttribute('id', `show-scene-${currentScene}`);
+
+        const { canvas } = sceneInfo[0].objs;
+        const heightRatio = window.innerHeight / 1080; // 1080 => canvas height
+        canvas.style.transform = `translate3d(-50%, -50%, 0) scale(${heightRatio})`; // 창 사이즈 높이에 맞춰 canvas 높이 설정하기
     }
 
     function calcValues(values, currentYOffset) {
@@ -199,6 +203,10 @@
                     calcValues(values.imageSequence, currentYOffset)
                 );
                 objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+                objs.canvas.style.opacity = calcValues(
+                    values.canvas_opacity,
+                    currentYOffset
+                );
 
                 if (scrollRatio <= 0.22) {
                     // in
@@ -408,6 +416,10 @@
         scrollLoop();
     });
     //window.addEventListener('DOMContentLoaded', setLayout); // DOM만 로드 되면 실행되기 때문에 load 보다 실행시점이 조금 더 빠르다
-    window.addEventListener('load', setLayout); // 웹페이지의 이미지 등 리소스 전부 로드되고 나서 실행
+    window.addEventListener('load', () => {
+        setLayout();
+        const { objs } = sceneInfo[0];
+        objs.context.drawImage(objs.videoImages[0], 0, 0);
+    }); // 웹페이지의 이미지 등 리소스 전부 로드되고 나서 실행
     window.addEventListener('resize', setLayout);
 })();
