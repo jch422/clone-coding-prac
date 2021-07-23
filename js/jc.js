@@ -111,6 +111,13 @@
             objs: {
                 container: document.querySelector('#scroll-section-3'),
                 canvasCaption: document.querySelector('.canvas-caption'),
+                canvas: document.querySelector('.image-blend-canvas'),
+                context: document.querySelector('.image-blend-canvas').getContext('2d'),
+                imagesPath: [
+                    './images/blend-image-1.jpg',
+                    './images/blend-image-2.jpg',
+                ],
+                images: []
             },
             values: {},
         },
@@ -131,10 +138,17 @@
             imgElem.src = `./video/001/IMG_${6726 + i}.JPG`;
             sceneInfo[0].objs.videoImages.push(imgElem);
         }
+
         for (let i = 0; i < sceneInfo[2].values.videoImageCount; i++) {
             imgElem = new Image(); // or document.createElement('img');
             imgElem.src = `./video/002/IMG_${7027 + i}.JPG`;
             sceneInfo[2].objs.videoImages.push(imgElem);
+        }
+
+        for(let i = 0; i < sceneInfo[3].objs.imagesPath.length; i++) {
+            imgElem = new Image();
+            imgElem.src = sceneInfo[3].objs.imagesPath[i];
+            sceneInfo[3].objs.images.push(imgElem);
         }
     }
     setCanvasImages();
@@ -415,6 +429,21 @@
                 break;
 
             case 3:
+                // 가로/세로 모두 꽉 차게 하기 위해 계산해서 세팅
+                const widthRatio  = window.innerWidth / objs.canvas.width;
+                const heightRatio = window.innerHeight / objs.canvas.height;
+                let canvasScaleRatio;
+
+                if(widthRatio <= heightRatio) {
+                    // 캔버스보다  브라우저 창이 홀쭉한 경우
+                    canvasScaleRatio = heightRatio;
+                } else {
+                    // 캔버스보다 브라우저 창이 넙적한 경우
+                    canvasScaleRatio = widthRatio;
+                }
+                objs.canvas.style.transform = `scale(${canvasScaleRatio})`;
+				objs.context.drawImage(objs.images[0], 0, 0);
+
                 break;
         }
     }

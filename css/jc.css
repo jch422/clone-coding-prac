@@ -201,6 +201,14 @@ a {
     top: 50%;
     left: 50%;
 }
+.image-blend-canvas {
+}
+
+#scroll-section-3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 @media (min-width: 1024px) {
     /* 창 크기가 1024px 이상이면 아래의 css가 적용된다 */
