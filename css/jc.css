@@ -1,183 +1,184 @@
 @charset 'utf-8';
 
 html {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
+  font-family: "Noto Sans KR", sans-serif;
+  font-size: 14px;
 }
 
 body {
-    overflow-x: hidden; /* 가로 스크롤이 생기지 않도록 */
-    color: rgb(29, 29, 31);
-    letter-spacing: -0.05em; /* 자간을 살짝 줄여주기 */
-    background: white;
+  overflow-x: hidden; /* 가로 스크롤이 생기지 않도록 */
+  color: rgb(29, 29, 31);
+  letter-spacing: -0.05em; /* 자간을 살짝 줄여주기 */
+  background: white;
 }
 
 p {
-    line-height: 1.6; /* 문단 사이 간격 */
+  line-height: 1.6; /* 문단 사이 간격 */
 }
 
 a {
-    color: rgb(29, 29, 31);
-    text-decoration: none;
+  color: rgb(29, 29, 31);
+  text-decoration: none;
 }
 
 .global-nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 100%;
-    height: 44px;
-    padding: 0 1rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 44px;
+  padding: 0 1rem;
 }
 
 .local-nav {
-    position: absolute;
-    top: 45px;
-    left: 0;
-    z-index: 11;
-    width: 100%;
-    height: 52px;
-    border-bottom: 1px solid #ddd;
-    padding: 0 1rem;
+  position: absolute;
+  top: 45px;
+  left: 0;
+  z-index: 11;
+  width: 100%;
+  height: 52px;
+  border-bottom: 1px solid #ddd;
+  padding: 0 1rem;
 }
 
 .global-nav-links,
 .local-nav-links {
-    max-width: 1000px;
-    height: 100%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
+  max-width: 1000px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
 }
 
 .global-nav-links {
-    justify-content: space-between;
+  justify-content: space-between;
 }
 
 .local-nav-links .product-name {
-    margin-right: auto;
-    font-size: 1.4rem;
-    font-weight: bold;
+  margin-right: auto;
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .local-nav-links a {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .local-nav-links a:not(.product-name) {
-    margin-left: 2em;
+  margin-left: 2em;
 }
 .scroll-section {
-    padding-top: 50vh; /* 브라우저 창 절반만큼 padding-top을 준다 */
+  position: relative;
+  padding-top: 50vh; /* 브라우저 창 절반만큼 padding-top을 준다 */
 }
 
 #scroll-section-0 h1 {
-    position: relative;
-    top: -20vh;
-    z-index: 5;
-    font-size: 4rem; /* 14px * 4 = 56px */
-    text-align: center;
+  position: relative;
+  top: -20vh;
+  z-index: 5;
+  font-size: 4rem; /* 14px * 4 = 56px */
+  text-align: center;
 }
 
 .main-message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 35vh;
-    height: 3em; /* 현재 element의 font 사이즈의 3배 높이 */
-    font-size: 2.5rem;
-    margin: 5px 0;
-    opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 35vh;
+  height: 3em; /* 현재 element의 font 사이즈의 3배 높이 */
+  font-size: 2.5rem;
+  margin: 5px 0;
+  opacity: 0;
 }
 
 .main-message p {
-    font-weight: bold;
-    text-align: center;
-    line-height: 1.2;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.2;
 }
 
 .main-message small {
-    display: block;
-    margin-bottom: 0.5em; /* 엘리먼트의 style 부분은 해당 엘리먼트의 font-size를 바탕으로 계산하도록 em 쓰는 것도 좋다 */
-    font-size: 1rem; /* font-size는 root로 설정한 14px에 비례하도록 */
+  display: block;
+  margin-bottom: 0.5em; /* 엘리먼트의 style 부분은 해당 엘리먼트의 font-size를 바탕으로 계산하도록 em 쓰는 것도 좋다 */
+  font-size: 1rem; /* font-size는 root로 설정한 14px에 비례하도록 */
 }
 
 #scroll-section-2 .main-message {
-    font-size: 3.5rem;
+  font-size: 3.5rem;
 }
 
 .description {
-    padding: 1rem;
-    font-size: 1.2rem;
-    color: #888;
-    max-width: 1000px;
-    margin: 0 auto;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: #888;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .description strong {
-    float: left;
-    margin-right: 0.2em;
-    font-size: 3rem;
-    color: rgb(29, 29, 31);
+  float: left;
+  margin-right: 0.2em;
+  font-size: 3rem;
+  color: rgb(29, 29, 31);
 }
 
 .sticky-elem.desc-message {
-    width: 45%;
-    font-weight: bold;
-    opacity: 0;
+  width: 45%;
+  font-weight: bold;
+  opacity: 0;
 }
 
 .pin {
-    width: 1px;
-    height: 100px;
-    background: rgb(29, 29, 31);
+  width: 1px;
+  height: 100px;
+  background: rgb(29, 29, 31);
 }
 
 #scroll-section-2 .b {
-    top: 10%;
-    left: 40%;
+  top: 10%;
+  left: 40%;
 }
 
 #scroll-section-2 .c {
-    top: 15%;
-    left: 45%;
+  top: 15%;
+  left: 45%;
 }
 
 .mid-message {
-    padding: 0 1rem;
-    font-size: 2rem;
-    color: #888;
-    max-width: 1000px;
-    margin: 0 auto;
+  padding: 0 1rem;
+  font-size: 2rem;
+  color: #888;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .mid-message strong {
-    color: rgb(29, 29, 31);
+  color: rgb(29, 29, 31);
 }
 
 .canvas-caption {
-    padding: 0 1rem;
-    color: #888;
-    font-size: 1.2rem;
-    max-width: 1000px;
-    margin: 0 auto;
+  padding: 0 1rem;
+  color: #888;
+  font-size: 1.2rem;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 7rem;
-    color: white;
-    background: darkorange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7rem;
+  color: white;
+  background: darkorange;
 }
 
 .sticky-elem {
-    display: none; /* javascript를 이용해서 선택적으로 노출 */
-    position: fixed;
-    left: 0;
-    width: 100%;
+  display: none; /* javascript를 이용해서 선택적으로 노출 */
+  position: fixed;
+  left: 0;
+  width: 100%;
 }
 /*
     #show-scene-# 은 body 에 붙여줄 ID 값
@@ -188,62 +189,62 @@ a {
 #show-scene-1 #scroll-section-1 .sticky-elem,
 #show-scene-2 #scroll-section-2 .sticky-elem,
 #show-scene-3 #scroll-section-3 .sticky-elem {
-    display: block;
+  display: block;
 }
 
 .sticky-elem-canvas {
-    top: 0;
-    height: 100%;
+  top: 0;
+  height: 100%;
 }
 
 .sticky-elem-canvas canvas {
-    position: absolute;
-    top: 50%;
-    left: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
 }
 .image-blend-canvas {
 }
 
 #scroll-section-3 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @media (min-width: 1024px) {
-    /* 창 크기가 1024px 이상이면 아래의 css가 적용된다 */
-    #scroll-section-0 h1 {
-        font-size: 9vw; /* window 사이즈의 9% 크기로 => 변동하는 값 */
-    }
-    .main-message {
-        font-size: 4vw;
-    }
-    .description {
-        font-size: 2rem;
-    }
-    .description strong {
-        font-size: 6rem;
-    }
-    #scroll-section-2 .main-message {
-        font-size: 6vw;
-    }
-    .main-message small {
-        font-size: 1.5vw;
-    }
-    .sticky-elem.desc-message {
-        width: 20%;
-    }
-    #scroll-section-2 .b {
-        top: 20%;
-        left: 53%;
-    }
-    #scroll-section-2 .c {
-        left: 55%;
-    }
-    .mid-message {
-        font-size: 4vw;
-    }
-    .canvas-caption {
-        font-size: 2rem;
-    }
+  /* 창 크기가 1024px 이상이면 아래의 css가 적용된다 */
+  #scroll-section-0 h1 {
+    font-size: 9vw; /* window 사이즈의 9% 크기로 => 변동하는 값 */
+  }
+  .main-message {
+    font-size: 4vw;
+  }
+  .description {
+    font-size: 2rem;
+  }
+  .description strong {
+    font-size: 6rem;
+  }
+  #scroll-section-2 .main-message {
+    font-size: 6vw;
+  }
+  .main-message small {
+    font-size: 1.5vw;
+  }
+  .sticky-elem.desc-message {
+    width: 20%;
+  }
+  #scroll-section-2 .b {
+    top: 20%;
+    left: 53%;
+  }
+  #scroll-section-2 .c {
+    left: 55%;
+  }
+  .mid-message {
+    font-size: 4vw;
+  }
+  .canvas-caption {
+    font-size: 2rem;
+  }
 }
