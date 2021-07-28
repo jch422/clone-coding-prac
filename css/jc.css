@@ -202,13 +202,19 @@ a {
   top: 50%;
   left: 50%;
 }
-.image-blend-canvas {
-}
+/* .image-blend-canvas.sticky-elem {
+  top: 0;
+} */
 
 #scroll-section-3 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.image-blend-canvas.sticky {
+  position: fixed;
+  top: 0;
 }
 
 @media (min-width: 1024px) {
