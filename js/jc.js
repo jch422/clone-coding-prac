@@ -108,6 +108,8 @@
       values: {
         rect1X: [0, 0, { start: 0, end: 0 }],
         rect2X: [0, 0, { start: 0, end: 0 }],
+        blendHeight: [0, 0, { start: 0, end: 0 }],
+        canvas_scale: [0, 0, { start: 0, end: 0 }],
         rectStartY: 0,
       },
     },
@@ -481,13 +483,6 @@
           document.body.offsetWidth / canvasScaleRatio;
         const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
 
-        const whiteRectWidth = recalculatedInnerWidth * 0.15;
-        values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
-        values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
-        values.rect2X[0] =
-          values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
-        values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
-
         if (!values.rectStartY) {
           //values.rectStartY = objs.canvas.getBoundingClientRect().top; // 스크롤 속도에 영향 받아서 사용하기 적절하지 않다
           values.rectStartY =
@@ -498,6 +493,13 @@
           values.rect1X[2].end = values.rectStartY / scrollHeight;
           values.rect2X[2].end = values.rectStartY / scrollHeight;
         }
+
+        const whiteRectWidth = recalculatedInnerWidth * 0.15;
+        values.rect1X[0] = (objs.canvas.width - recalculatedInnerWidth) / 2;
+        values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
+        values.rect2X[0] =
+          values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
+        values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
 
         // 좌우 흰색 박스 그리기
         objs.context.fillRect(
@@ -519,10 +521,43 @@
           objs.canvas.classList.remove("sticky");
         } else {
           step = 2;
+          // 캔버스 닿은 후
+          // 이미지 블렌드
+          values.blendHeight[0] = 0;
+          values.blendHeight[1] = objs.canvas.height;
+          values.blendHeight[2].start = values.rect1X[2].end;
+          values.blendHeight[2].end = values.blendHeight[2].start + 0.2;
+          const blendHeight = calcValues(values.blendHeight, currentYOffset);
+
+          objs.context.drawImage(
+            objs.images[1],
+            0,
+            objs.canvas.height - blendHeight,
+            objs.canvas.width,
+            blendHeight,
+            0,
+            objs.canvas.height - blendHeight,
+            objs.canvas.width,
+            blendHeight
+          );
+
           objs.canvas.classList.add("sticky");
           objs.canvas.style.top = `${
             -(objs.canvas.height - objs.canvas.height * canvasScaleRatio) / 2
           }px`;
+        }
+
+        if (scrollRatio > values.blendHeight[2].end) {
+          values.canvas_scale[0] = canvasScaleRatio;
+          values.canvas_scale[1] =
+            document.body.offsetWidth / (1.5 * objs.canvas.width);
+          values.canvas_scale[2].start = values.blendHeight[2].end;
+          values.canvas_scale[2].end = values.canvas_scale[2].start + 0.2;
+
+          objs.canvas.style.transform = `scale(${calcValues(
+            values.canvas_scale,
+            currentYOffset
+          )})`;
         }
 
         break;
