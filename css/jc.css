@@ -223,6 +223,11 @@ body.before-load {
   opacity: 0;
   transition: 0.5s;
 }
+/* 
+  section 0, 2, 3은 계산된 높이를 필요로하는데, 새로고침 눌러서 load가 될 때에는
+  이 높이값들이 적절하게 설정되기 전이라서 높이 계산 및 애니메이션 효과 관련해서 오차가 발생.
+  그래서 load 전에는 보이지 않게 하기 위한 css 설정   
+*/
 .before-load .container {
   display: none;
 }
